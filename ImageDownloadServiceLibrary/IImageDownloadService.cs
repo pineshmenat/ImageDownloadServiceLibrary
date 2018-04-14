@@ -12,5 +12,8 @@ namespace ImageDownloadServiceLibrary
     {
         [OperationContract]
         string GetData(int value);
+
+        [OperationContract]
+        bool saveTodaysBingWallpaper();
     }
 }

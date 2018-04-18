@@ -208,5 +208,55 @@ namespace ImageDownloadServiceLibrary
             }
             return status;
         }
+
+        public List<Image> getBingWallpapers()
+        {
+            List<Image> bingWallpapers = new List<Image>();
+
+            using (SqlConnection sqlconnection = new SqlConnection("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=image_downloader;Integrated Security=True"))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT [image_id],[image],[source],[created_date],[image_name] FROM [images] WHERE [source] = '" + Source.Bing + "'", sqlconnection);
+                sqlconnection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Image image = new Image();
+                    image.image_id = Convert.ToInt32(reader["image_id"]);
+                    image.image = (byte[])reader["image"];
+                    image.source = reader["source"].ToString();
+                    image.created_date = (DateTime.Parse(reader["created_date"].ToString())).Date;
+                    image.image_name= reader["image_name"].ToString();
+                    bingWallpapers.Add(image);
+                }
+                sqlconnection.Close();
+            }
+
+            return bingWallpapers;
+        }
+
+        public List<Image> getInstagramImages()
+        {
+            List<Image> instagramImages = new List<Image>();
+
+            using (SqlConnection sqlconnection = new SqlConnection("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=image_downloader;Integrated Security=True"))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT [image_id],[image],[source],[created_date],[image_name] FROM [images] WHERE [source] = '"+Source.Instagram+"'", sqlconnection);
+                sqlconnection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Image image = new Image();
+                    image.image_id = Convert.ToInt32(reader["image_id"]);
+                    image.image = (byte[])reader["image"];
+                    image.source = reader["source"].ToString();
+                    image.created_date = (DateTime.Parse(reader["created_date"].ToString())).Date;
+                    image.image_name = reader["image_name"].ToString();
+                    instagramImages.Add(image);
+                }
+                sqlconnection.Close();
+            }
+
+            return instagramImages;
+        }
     }
 }

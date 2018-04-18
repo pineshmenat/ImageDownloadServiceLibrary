@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IImageDownloadService.cs" />
+    <Compile Include="InvalidUrlFault.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ImageDownloadService.cs" />
   </ItemGroup>

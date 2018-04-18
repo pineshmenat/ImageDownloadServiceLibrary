@@ -15,5 +15,9 @@ namespace ImageDownloadServiceLibrary
 
         [OperationContract]
         bool saveTodaysBingWallpaper();
+
+        [FaultContract(typeof(InvalidUrlFault))]
+        [OperationContract]
+        bool downloadInstagramImage(String url);
     }
 }

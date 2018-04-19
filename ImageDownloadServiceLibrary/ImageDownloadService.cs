@@ -85,7 +85,7 @@ namespace ImageDownloadServiceLibrary
             }
             if (File.Exists(bingWallpaperPath))
             {
-                File.Delete(bingWallpaperPath);
+                //File.Delete(bingWallpaperPath);
             }
             return status;
         }
@@ -200,7 +200,7 @@ namespace ImageDownloadServiceLibrary
                 }
                 if (File.Exists(instagramImagePath))
                 {
-                    File.Delete(instagramImagePath);
+                    //File.Delete(instagramImagePath);
                 }
             } else
             {

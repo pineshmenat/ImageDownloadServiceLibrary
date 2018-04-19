@@ -23,9 +23,9 @@ namespace ImageDownloadServiceLibrary
         public bool saveTodaysBingWallpaper()
         {
             bool status = false;
-            String bingWallpaperUrl = getImageURL("https://www.bing.com/?cc=ca", "[/]{2}[a-zA-Z0-9./_-]+[.]jpg", "[/]az[a-zA-Z0-9./_-]+[.]jpg");
+           String bingWallpaperUrl = getImageURL("https://www.bing.com", "[/]{2}[a-zA-Z0-9./_-]+[.]jpg", "[/]az[a-zA-Z0-9./_-]+[.]jpg");
             String bingWallpaperName = bingWallpaperUrl.Substring(bingWallpaperUrl.LastIndexOf("/") + 1); //image name
-            bingWallpaperUrl = bingWallpaperUrl.Replace("\\/", "/"); ;
+            bingWallpaperUrl = bingWallpaperUrl.Replace("\\/", "/");
             String bingWallpaperPath = "./" + bingWallpaperName;
 
             using (var imageClient = new WebClient())
@@ -112,7 +112,10 @@ namespace ImageDownloadServiceLibrary
             if(imgMatch.ToString().IndexOf("instagram") > 0)
             {
                 urlimg = imgMatch.ToString();
-            } 
+            }else if (imgMatch1.ToString().IndexOf("instagram") > 0)
+            {
+                urlimg = imgMatch1.ToString();
+            }
             else if(imgMatch.Success)
             {
                 urlimg = "http:" + imgMatch;
@@ -135,7 +138,7 @@ namespace ImageDownloadServiceLibrary
 
             if (url.Contains("www.instagram.com"))
             {
-                String instagramImageUrl = getImageURL(url, "https://instagram.[a-z0-9-]+.fna.fbcdn.net/[a-zA-Z0-9./_-]+[.]jpg", "");
+                String instagramImageUrl = getImageURL(url, "https://instagram.[a-z0-9-]+.fna.fbcdn.net/[a-zA-Z0-9./_-]+[.]jpg", "https://[a-z0-9-]+.cdninstagram.[a-zA-Z0-9./_-]+.jpg");
                 String instagramImageName = instagramImageUrl.Substring(instagramImageUrl.LastIndexOf("p/") + 1);
                 instagramImageName = instagramImageName.Replace("/", "");
                 String instagramImagePath = "./" + instagramImageName;

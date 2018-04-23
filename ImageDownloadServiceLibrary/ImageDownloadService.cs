@@ -39,11 +39,11 @@ namespace ImageDownloadServiceLibrary
             {
                 sqlconnection.Open();
 
-                SqlCommand cmd = new SqlCommand("SELECT [image_name] FROM [images] Where [source] = '"+Source.Bing+"';", sqlconnection);
+                SqlCommand cmd = new SqlCommand("SELECT [image_name] FROM [images] Where [image_name] = '" + bingWallpaperName + "';", sqlconnection);
                 SqlDataReader reader = cmd.ExecuteReader();
                 if(reader.Read())
                 {
-                    if(bingWallpaperName == reader["image_name"].ToString())
+                    if(bingWallpaperName.Equals(reader["image_name"].ToString()))
                     {
                         status = true;
                         sqlconnection.Close();
@@ -85,7 +85,7 @@ namespace ImageDownloadServiceLibrary
             }
             if (File.Exists(bingWallpaperPath))
             {
-                //File.Delete(bingWallpaperPath);
+                File.Delete(bingWallpaperPath);
             }
             return status;
         }
@@ -158,7 +158,7 @@ namespace ImageDownloadServiceLibrary
                     SqlDataReader reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
-                        if (instagramImageName == reader["image_name"].ToString())
+                        if (instagramImageName.Equals(reader["image_name"].ToString()))
                         {
                             status = true;
                             sqlconnection.Close();
@@ -200,7 +200,7 @@ namespace ImageDownloadServiceLibrary
                 }
                 if (File.Exists(instagramImagePath))
                 {
-                    //File.Delete(instagramImagePath);
+                    File.Delete(instagramImagePath);
                 }
             } else
             {

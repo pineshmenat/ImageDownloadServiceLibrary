@@ -1,0 +1,30 @@
+USE [image_downloader]
+GO
+
+ALTER TABLE [dbo].[images] DROP CONSTRAINT [DF_images_created_date]
+GO
+
+/****** Object:  Table [dbo].[images]    Script Date: 2018-04-22 23:37:39 ******/
+DROP TABLE [dbo].[images]
+GO
+
+/****** Object:  Table [dbo].[images]    Script Date: 2018-04-22 23:37:39 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[images](
+	[image_id] [int] IDENTITY(1,1) NOT NULL,
+	[image] [varbinary](max) NOT NULL,
+	[source] [varchar](50) NOT NULL,
+	[created_date] [date] NOT NULL,
+	[image_name] [varchar](1000) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[images] ADD  CONSTRAINT [DF_images_created_date]  DEFAULT (CONVERT([date],getdate())) FOR [created_date]
+GO
+
+
